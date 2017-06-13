@@ -1,0 +1,143 @@
+{% extends 'KoiBundle::base.html.twig' %}
+{% block body %}
+    {{ parent() }}
+
+    <div class="wrapper">
+        <div class="content-wrap">
+            <!-- Start CONTENT -->
+            <div class="content">
+                <div class="container-wrapper">
+                    <div class="container">
+                        <div class="breadcrumbs">
+                            <a href="{{ path('koi_homepage') }}"><span class="icon icon-chevron-right"></span>Zurück</a>
+                        </div>
+                        <div class="details-site row">
+                            <h2>{{ feed.nameFeed }}</h2>
+                            <div class="col-bg">
+                                <div class="table-list clearfix">
+                                    <h3>Analytische Bestandteile</h3>
+                                    <div class="properties">
+                                        {% for elementsActive in elements if elementsActive.idType.id == 1 %}
+                                            {% for feed_elementsActive in feed_elements
+                                            if feed_elementsActive.idElement.id == elementsActive.id %}
+                                                <span class="prop-value">
+                                                <span class="prop-title">{{ elementsActive.nameElement }}:</span>
+                                                    {{ feed_elementsActive.amount }} {{ elementsActive.scaleElement }}
+                                            </span>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="table-list clearfix">
+                                    <h3>Eigenschafften</h3>
+                                    <div class="properties">
+                                    <span class="prop-value tooltip" title="Jahreszeit">
+                                        <span class="icon icon-flower"></span>
+                                        <span class="loop-comma">
+                                            {% for seasonActive in seasons %}
+                                                {% for feed_seasonsActive in feed_seasons
+                                                if feed_seasonsActive.idSeason.id == seasonActive.id
+                                                %}
+                                                    {{ seasonActive.nameSeason }},
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </span>
+                                    </span>
+
+                                        {% if feed.waterTemperature %}
+                                            <span class="prop-value tooltip" title="Temperaturr">
+                                            <span class="icon icon-thermometer"></span>
+                                            ab {{ feed.waterTemperature }}Â°
+                                        </span>
+                                        {% endif %}
+
+                                        {% if feed.pelletSizeMin or feed.pelletSizeMax %}
+                                            <span class="prop-value tooltip" title="GrÃ¶ÃŸe">
+                                            <span class="icon icon-price-tag"></span>
+                                                {{ feed.pelletSizeMin }} cm
+                                                {% if feed.pelletSizeMax %}
+                                                    - {{ feed.pelletSizeMax }} cm
+                                                {% endif %}
+                                        </span>
+                                        {% endif %}
+
+                                        {% if feed.colorant %}
+                                            <span class="prop-value tooltip" title="Farbstoff">
+                                            <span class="icon icon-brush"></span>{{ feed.colorant }}
+                                        </span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="table-list clearfix">
+                                    <h3>Zusatzstoffe und Spurenelemente</h3>
+                                    <div class="properties-list row">
+                                        <div class="col-nr">
+                                            {% for elementsActive in elements if elementsActive.idType.id == 2 %}
+                                                {% for feed_elementsActive in feed_elements
+                                                if feed_elementsActive.idElement.id == elementsActive.id %}
+                                                    <span class="prop-value">
+                                                    <span class="prop-title">{{ elementsActive.nameElement }}:</span>
+                                                        {{ feed_elementsActive.amount }} {{ elementsActive.scaleElement }}
+                                                </span>
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </div>
+                                        <div class="col-nr">
+                                            {% for elementsActive in elements if elementsActive.idType.id == 3 %}
+                                                {% for feed_elementsActive in feed_elements
+                                                if feed_elementsActive.idElement.id == elementsActive.id %}
+                                                    <span class="prop-value">
+                                                    <span class="prop-title">{{ elementsActive.nameElement }}:</span>
+                                                        {{ feed_elementsActive.amount }} {{ elementsActive.scaleElement }}
+                                                </span>
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </div>
+                                        <div class="col-nr">
+                                            {% for elementsActive in elements if elementsActive.idType.id == 4 %}
+                                                {% for feed_elementsActive in feed_elements
+                                                if feed_elementsActive.idElement.id == elementsActive.id %}
+                                                    <span class="prop-value">
+                                                    <span class="prop-title">{{ elementsActive.nameElement }}:</span>
+                                                        {{ feed_elementsActive.amount }} {{ elementsActive.scaleElement }}
+                                                </span>
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </div>
+                                        <a class="more-info"></a>
+
+                                    </div>
+                                </div>
+                                <div class="table-list clearfix">
+                                    <h3>Zusammensetzung</h3>
+                                    <div class="properties">
+                                    <span class="all prop-value loop-comma">
+                                         {% for componentsActive in components %}
+                                             {% for feed_componentsActive in feed_components
+                                             if feed_componentsActive.idComponent.id == componentsActive.id %}
+                                                 {{ componentsActive.nameComponent }},
+                                             {% endfor %}
+                                         {% endfor %}
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm">
+                                <div class="table-list table-details clearfix">
+                                    {%  if feed.idDistributor %}
+                                        <img src="{{ asset('images/content/' ~ feed.idDistributor.nameImage) }}"
+                                             alt="{{ feed.idDistributor.nameImage }}">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

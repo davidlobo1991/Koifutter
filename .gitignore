@@ -1,0 +1,6 @@
+/var/cache
+/vendor
+.idea
+/app/config/parameters.yml
+var/logs
+

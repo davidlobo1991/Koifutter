@@ -1,0 +1,79 @@
+<?php
+
+namespace KoiBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * FeedSeason
+ *
+ * @ORM\Table(name="feed_seasons")
+ * @ORM\Entity(repositoryClass="KoiBundle\Repository\FeedSeasonRepository")
+ */
+class FeedSeason
+{
+    /**
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Feed", inversedBy="seasons", cascade={"persist"})
+     * @ORM\JoinColumn(name="id_feed", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+	 *
+     */
+
+    private $idFeed;
+
+    /**
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Season", inversedBy="feed", cascade={"persist"})
+     * @ORM\JoinColumn(name="id_season", referencedColumnName="id_season", nullable=false, onDelete="CASCADE")
+     */
+    private $idSeason;
+
+    /**
+     * Set idFeed
+     *
+     * @param integer $idFeed
+     *
+     * @return FeedSeason
+     */
+    public function setIdFeed($idFeed)
+    {
+        $this->idFeed = $idFeed;
+
+        return $this;
+    }
+
+    /**
+     * Get idFeed
+     *
+     * @return int
+     */
+    public function getIdFeed()
+    {
+        return $this->idFeed;
+    }
+
+    /**
+     * Set idSeason
+     *
+     * @param integer $idSeason
+     *
+     * @return FeedSeason
+     */
+    public function setIdSeason($idSeason)
+    {
+        $this->idSeason = $idSeason;
+
+        return $this;
+    }
+
+    /**
+     * Get idSeason
+     *
+     * @return int
+     */
+    public function getIdSeason()
+    {
+        return $this->idSeason;
+    }
+}

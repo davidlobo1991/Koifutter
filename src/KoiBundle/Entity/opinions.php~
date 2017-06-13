@@ -1,0 +1,190 @@
+<?php
+
+namespace KoiBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * opinions
+ *
+ * @ORM\Table(name="opinions")
+ * @ORM\Entity(repositoryClass="KoiBundle\Repository\opinionsRepository")
+ */
+class opinions
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="commentar", type="string", length=255)
+     */
+    private $commentar;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="valuation", type="smallint")
+     */
+    private $valuation;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_feed", type="integer")
+     */
+    private $idFeed;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return opinions
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return opinions
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set commentar
+     *
+     * @param string $commentar
+     *
+     * @return opinions
+     */
+    public function setCommentar($commentar)
+    {
+        $this->commentar = $commentar;
+
+        return $this;
+    }
+
+    /**
+     * Get commentar
+     *
+     * @return string
+     */
+    public function getCommentar()
+    {
+        return $this->commentar;
+    }
+
+    /**
+     * Set valuation
+     *
+     * @param integer $valuation
+     *
+     * @return opinions
+     */
+    public function setValuation($valuation)
+    {
+        $this->valuation = $valuation;
+
+        return $this;
+    }
+
+    /**
+     * Get valuation
+     *
+     * @return int
+     */
+    public function getValuation()
+    {
+        return $this->valuation;
+    }
+
+    /**
+     * Set idFeed
+     *
+     * @param integer $idFeed
+     *
+     * @return opinions
+     */
+    public function setIdFeed($idFeed)
+    {
+        $this->idFeed = $idFeed;
+
+        return $this;
+    }
+
+    /**
+     * Get idFeed
+     *
+     * @return int
+     */
+    public function getIdFeed()
+    {
+        return $this->idFeed;
+    }
+}
+

@@ -1,0 +1,127 @@
+{% block list %}
+        <form class="compare-form" id="compare-form">
+        <div id="pagination-list">
+            {% for feedActive in feed %}
+                <div class="table-list row">
+                    <div class="table-properties col-bg">
+                        <h3>{{ feedActive.nameFeed }}</h3>
+                        <div class="properties-1">
+
+                            <span class="prop-value tooltip" title="Jahreszeit">
+                                <span class="icon icon-flower"></span>
+                                <span class="loop-comma">
+                                    {% for seasonActive in seasons %}
+                                        {% for feed_seasonsActive in feed_seasons
+                                        if feed_seasonsActive.idFeed.id == feedActive.id
+                                        and feed_seasonsActive.idSeason.id == seasonActive.id
+                                        %}
+                                            {{ seasonActive.nameSeason }},
+                                        {% endfor %}
+                                    {% endfor %}
+                                </span>
+                            </span>
+
+
+                            {% if feedActive.waterTemperature %}
+                                <span class="prop-value tooltip" title="Temperatur">
+                                    <span class="icon icon-thermometer"></span>
+                                    ab {{ feedActive.waterTemperature }} °
+                                </span>
+                            {% endif %}
+
+                            {% if feedActive.pelletSizeMin or feedActive.pelletSizeMax %}
+                                <span class="prop-value tooltip" title="Größe">
+                                    <span class="icon icon-ice-crystal"></span>
+                                    {% if feedActive.pelletSizeMin %}
+                                        {{ feedActive.pelletSizeMin }} mm
+                                    {% endif %}
+                                    {% if feedActive.pelletSizeMax %}
+                                        - {{ feedActive.pelletSizeMax }} mm
+                                    {% endif %}
+                                </span>
+                            {% endif %}
+
+                             {% if feedActive.colorant %}
+                                <span class="prop-value tooltip" title="Farbstoff">
+                                    <span class="icon icon-brush"></span>
+                                    {{ feedActive.colorant }}
+                                </span>
+                             {% endif %}
+                        </div>
+                        <div class="properties-2">
+                            {% for elementsActive in elements if elementsActive.idType.id == 1 %}
+                                {% for feed_elementsActive in feed_elements
+                                if feed_elementsActive.idElement.id == elementsActive.id
+                                and feed_elementsActive.idFeed.id == feedActive.id %}
+                                    <span class="prop-value">
+                                        <span class="prop-title">{{ elementsActive.nameElement }}:</span>
+                                        {{ feed_elementsActive.amount }} {{ elementsActive.scaleElement }}
+                                    </span>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                        <div class="properties-3">
+                            <span class="all prop-value">
+                                <span class="prop-title">Zusatzstoffe und Spurenelemente:</span>
+                                <span class="loop-comma">
+                                    {% for elementsActive in elements
+                                    if elementsActive.idType.id == 2
+                                    or elementsActive.idType.id == 3
+                                    or elementsActive.idType.id == 4 %}
+                                        {% for feed_elementsActive in feed_elements
+                                        if feed_elementsActive.idElement.id == elementsActive.id
+                                        and feed_elementsActive.idFeed.id == feedActive.id %}
+                                            {{ elementsActive.nameElement }}
+                                            ({{ feed_elementsActive.amount }}
+                                            {{ elementsActive.scaleElement }}),
+                                        {% endfor %}
+                                    {% endfor %}
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="table-details col-sm">
+                        {%  if feedActive.idDistributor %}
+                            <img src="{{ asset('images/content/' ~ feedActive.idDistributor.nameImage) }}"
+                             alt="{{ feedActive.idDistributor.nameImage }}">
+                        {% endif %}
+                        <a href="{{ path('_details', {'id_feed': feedActive.id, }) }}" class="btn-details btn">
+                            Zu den details
+                            <span class="icon icon-chevron-right"></span>
+                        </a>
+                        <div class="details-compare">
+                            {% set checked = app.session.get('_idfeed_' ~ feedActive.id)  %}
+                            {% if checked %}
+                                <input type="checkbox" name="{{ feedActive.id }}" id="feed-{{ feedActive.id }}" checked="checked">
+                                <label for = "feed-{{ feedActive.id }}">Vergleichen</label>
+                            {% else %}
+                                <input type="checkbox" name="{{ feedActive.id }}" id="feed-{{ feedActive.id }}">
+                                <label for = "feed-{{ feedActive.id }}">Vergleichen</label>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+           <div class="navigation">
+                {{ knp_pagination_render(feed) }}
+           </div>
+            <div class="select-num left">
+                <form action="{{ path('koi_homepage') }}" method="post">
+                    <label for="num-feed">Treffer je Seite:</label>
+                    <select id="num-feed" name="num_feed" class="select-list" data-url="{{ path('_sorting') }}">
+                           <option value="5" {{  num_per_page == 5 ? 'selected' : '' }}>5</option>
+                           <option value="10" {{ num_per_page == 10 ? 'selected' : '' }}>10</option>
+                           <option value="20" {{ num_per_page == 20 ? 'selected' : '' }}>20</option>
+                    </select>
+                    <span class="icon icon-chevron-down"></span>
+                    <input type="hidden" name="list-order" value="{% if app.request.get('list-order') %}{{ app.request.get('list-order') }}{% else %}nameFeed-asc-col{% endif %}"/>
+                    <input type="hidden" class="hidden_id_feed" name="id_feed" value="" />
+                </form>
+            </div>
+
+            <input id="compare-send" class="btn" type="submit" value="Vergleichen">
+    <span class="alert">Mindestens 2 Produkte auswählen</span>
+</form>
+
+{% endblock %}

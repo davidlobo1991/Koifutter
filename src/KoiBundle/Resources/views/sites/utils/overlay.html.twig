@@ -1,0 +1,28 @@
+{% block compare %}
+        <table class="compare-table">
+            <thead>
+            <tr>
+                <td class="headcol"></td>
+                {% for feedActive in feed %}
+                    <td>{{ feedActive.nameFeed }}</td>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+                {% for elementsActive in elements %}
+                    <tr>
+                        <td class="headcol">{{ elementsActive.nameElement }} ({{ elementsActive.scaleElement }})</td>
+                            {% for feedActive in feed %}
+                                {% for feed_elementsActive in feed_elements
+                                if feed_elementsActive.idElement.id == elementsActive.id
+                                and feed_elementsActive.idFeed.id == feedActive.id %}
+                                    <td>{{ feed_elementsActive.amount }}</td>
+                                {% else %}
+                                    <td>-</td>
+                                {% endfor %}
+                            {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

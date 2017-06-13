@@ -1,0 +1,66 @@
+<?php
+
+namespace KoiBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * seasons
+ *
+ * @ORM\Table(name="seasons")
+ * @ORM\Entity(repositoryClass="KoiBundle\Repository\seasonsRepository")
+ */
+class seasons
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name_season", type="string", length=10)
+     */
+    private $nameSeason;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nameSeason
+     *
+     * @param string $nameSeason
+     *
+     * @return seasons
+     */
+    public function setNameSeason($nameSeason)
+    {
+        $this->nameSeason = $nameSeason;
+
+        return $this;
+    }
+
+    /**
+     * Get nameSeason
+     *
+     * @return string
+     */
+    public function getNameSeason()
+    {
+        return $this->nameSeason;
+    }
+}
+

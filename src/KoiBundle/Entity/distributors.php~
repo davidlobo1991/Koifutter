@@ -1,0 +1,99 @@
+<?php
+
+namespace KoiBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\OneToOne;
+
+/**
+ * distributors
+ *
+ * @ORM\Table(name="distributors")
+ * @ORM\Entity(repositoryClass="KoiBundle\Repository\distributorsRepository")
+ */
+class distributors
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name_distributor", type="string", length=255)
+     */
+    private $nameDistributor;
+
+    /**
+     * @OneToOne(targetEntity="distributors_image")
+     * @JoinColumn(name="id_image", referencedColumnName="id")
+     */
+
+    private $idImage;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nameDistributor
+     *
+     * @param string $nameDistributor
+     *
+     * @return distributors
+     */
+    public function setNameDistributor($nameDistributor)
+    {
+        $this->nameDistributor = $nameDistributor;
+
+        return $this;
+    }
+
+    /**
+     * Get nameDistributor
+     *
+     * @return string
+     */
+    public function getNameDistributor()
+    {
+        return $this->nameDistributor;
+    }
+
+    /**
+     * Set idImage
+     *
+     * @param string $idImage
+     *
+     * @return distributors
+     */
+    public function setIdImage($idImage)
+    {
+        $this->idImage = $idImage;
+
+        return $this;
+    }
+
+    /**
+     * Get idImage
+     *
+     * @return string
+     */
+    public function getIdImage()
+    {
+        return $this->idImage;
+    }
+}
+

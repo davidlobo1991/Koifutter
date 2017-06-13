@@ -1,0 +1,23 @@
+KoiBundle\Entity\Distributor:
+    type: entity
+    repositoryClass: KoiBundle\Repository\Distributor
+    table: distributors
+    id:
+    id:
+        type:         integer
+        generator:    { strategy: AUTO }
+    fields:
+    nameImage:
+        type:         string
+        length:       100
+
+
+    # changed when files are uploaded, to force preUpdate and postUpdate to fire
+    updated:
+        type:         datetime
+        nullable:     true
+
+    # ... other fields ...
+    lifecycleCallbacks:
+        prePersist:   [ lifecycleFileUpload ]
+        preUpdate:    [ lifecycleFileUpload ]

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Koifutter Vergleich{% endblock %}</title>
+        {% block stylesheets %}
+            <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('js/vendor/ui/jquery-ui.min.css') }}" rel="stylesheet" type="text/css" />
+
+
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% block body %}
+            {% block header %}
+                <!-- Start HEADER -->
+                <div class="header">
+                    <header>
+                        <h1>
+                            <a href="{{ path('koi_homepage') }}" title="Zur Startseite" class="logo">
+                                <img src="{{ asset('images/koifuttervergleich.png') }}" alt="Koifuttervergleich">
+                            </a>
+                        </h1>
+                    </header>
+                </div>
+                <!-- End HEADER -->
+            {% endblock %}
+        {% endblock %}
+
+        {% block javascripts %}
+            <script src={{ asset('js/vendor/jquery-3.1.1.min.js') }}></script>
+            <script src={{ asset('js/vendor/ui/jquery-ui.min.js') }}></script>
+            <script src={{ asset('js/scripts.js') }}></script>
+            <script src="{{ asset('js/base.compare.js') }}"></script>
+            <script src="{{ asset('js/base.buttons.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

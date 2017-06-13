@@ -1,0 +1,32 @@
+koi_homepage:
+    path:     /
+    defaults: { _controller: KoiBundle:Default:index }
+
+_details:
+    path:  /details/{id_feed}
+    defaults: { _controller: KoiBundle:Details:details }
+
+_compare:
+    path: /compare
+    defaults: { _controller: KoiBundle:Compare:compare }
+
+_session_checkbox:
+    path: /checkbox
+    defaults: { _controller: KoiBundle:Compare:checkbox }
+
+_search:
+    path: /search
+    defaults: { _controller: KoiBundle:Search:search }
+
+_filter:
+    path: /filter
+    defaults: { _controller: KoiBundle:Filter:filter }
+
+_sorting:
+    path: /sorting
+    defaults: { _controller: KoiBundle:Sorting:sorting }
+
+_paginate:
+    path: /paginate
+    defaults: { _controller: KoiBundle:Default:paginate }
+

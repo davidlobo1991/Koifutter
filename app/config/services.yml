@@ -1,0 +1,69 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+  test:
+    class: KoiBundle\Services\Elements
+    arguments: [valueForMyProperty, otherValue]
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+  feed.service:
+    class: KoiBundle\Admin\FeedAdmin
+    tags:
+      - {name: sonata.admin, manager_type: orm, group: Admin, label: Koifutter }
+    arguments: [null, KoiBundle\Entity\Feed, KoiBundle:Admin\FeedAdmin]
+
+  element.service:
+    class: KoiBundle\Admin\ElementAdmin
+    tags:
+      - {name: sonata.admin, manager_type: orm, group: Admin, label: Element, show_in_dashboard: false }
+    arguments: [null, KoiBundle\Entity\Element, KoiBundle:Admin\ElementAdmin]
+
+  component.service:
+    class: KoiBundle\Admin\ComponentAdmin
+    tags:
+      - {name: sonata.admin, manager_type: orm, group: Admin, label: Components }
+    arguments: [null, KoiBundle\Entity\Component, KoiBundle:Admin\ComponentAdmin]
+
+  season.service:
+    class: KoiBundle\Admin\SeasonAdmin
+    tags:
+      - {name: sonata.admin, manager_type: orm, group: Admin, label: Seasons, show_in_dashboard: false }
+    arguments: [null, KoiBundle\Entity\Season, KoiBundle:Admin\SeasonAdmin]
+
+
+  distributor.service:
+    class: KoiBundle\Admin\DistributorAdmin
+    tags:
+      - {name: sonata.admin, manager_type: orm, group: Admin, label: Distributors}
+    arguments: [null, KoiBundle\Entity\Distributor, KoiBundle:Admin\DistributorAdmin]
+
+  type.element.service:
+      class: KoiBundle\Admin\TypeElementAdmin
+      tags:
+        - {name: sonata.admin, manager_type: orm, group: Admin, label: Type Element, show_in_dashboard: false}
+      arguments: [null, KoiBundle\Entity\TypeElement, KoiBundle:Admin\TypeElementAdmin]
+
+  feed.element.service:
+      class: KoiBundle\Admin\FeedElementAdmin
+      tags:
+       - {name: sonata.admin, manager_type: orm, group: Admin, label: Feed Element, show_in_dashboard: false }
+      arguments: [null, KoiBundle\Entity\FeedElement, KoiBundle:Admin\FeedElementAdmin]
+
+  feed.component.service:
+        class: KoiBundle\Admin\FeedComponentAdmin
+        tags:
+         - {name: sonata.admin, manager_type: orm, group: Admin, label: Feed Component, show_in_dashboard: false }
+        arguments: [null, KoiBundle\Entity\FeedComponent, KoiBundle:Admin\FeedComponentAdmin]
+
+  feed.season.service:
+         class: KoiBundle\Admin\FeedSeasonAdmin
+         tags:
+           - {name: sonata.admin, manager_type: orm, group: Admin, label: Feed Season, show_in_dashboard: false }
+         arguments: [null, KoiBundle\Entity\FeedSeason, KoiBundle:Admin\FeedSeasonAdmin]
+
+

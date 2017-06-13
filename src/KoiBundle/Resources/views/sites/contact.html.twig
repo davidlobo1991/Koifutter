@@ -1,0 +1,24 @@
+{% extends 'KoiBundle::base.html.twig' %}
+{% block body %}
+    {{ parent() }}
+
+<div class="wrapper">
+    <div class="content-wrap">
+        <!-- Start CONTENT -->
+        <div class="content">
+            <div class="container-wrapper">
+                <div class="container">
+                    <div class="breadcrumbs">
+                        <a href="{{ path('koi_homepage') }}"><span class="icon icon-chevron-right"></span>Zurück</a>
+                    </div>
+                    <div class="contact-site row">
+                        <h2>Contact</h2>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

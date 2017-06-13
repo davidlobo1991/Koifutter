@@ -1,0 +1,283 @@
+// ===========================================================
+// DEFAULT STYLES
+// ===========================================================
+
+* {
+	@include box-sizing(border-box);
+}
+
+html,
+body {
+	min-height: 100vh;
+	margin: 0;
+
+}
+
+html {
+	color: $c_font_default;
+	font-family: $f_regular;
+	font-size: 100%;
+
+	@include media('<small') {
+		font-size: 90%;
+	}
+
+	@include media('<extra-small') {
+		font-size: 80%;
+	}
+}
+
+// ===========================================================
+// HEADLINES
+// ===========================================================
+
+h1,
+.h1 {
+	margin: 0;
+	font-size: rem(24);
+	font-weight: normal;
+	text-transform: uppercase;
+}
+
+h2,
+.h2 {
+	display: inline-block;
+	margin: 0;
+	font-size: rem(26);
+}
+
+h3,
+.h3 {
+	margin: 0;
+	font-size: rem(20);
+	font-weight: normal;
+}
+
+h4,
+.h4 {
+	margin: 20px 0 15px;
+	font-size: rem(20);
+}
+
+h5,
+.h5 {
+	margin: 20px 0 15px;
+	font-size: rem(16);
+}
+
+
+// ===========================================================
+// BASIC STYLING
+// ===========================================================
+
+p {
+	margin: 0 0 25px;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+
+	img {
+		border: 0;
+	}
+
+	&:focus, &:active {
+		outline: none;
+	}
+}
+
+hr {
+	clear: both;
+	height: 1px;
+	border: 0;
+	margin: 40px 0;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+
+// ===========================================================
+// UTILITIES
+// ===========================================================
+
+.clearfix,
+%clearfix {
+	&:after {
+		content: ' ';
+		clear: both;
+		display: block;
+		height: 0;
+	}
+}
+
+.hide {
+	display: none;
+}
+
+.open {
+	display: block !important;
+	opacity: 1 !important;
+}
+
+.right {
+	float: right;
+
+	@include media('<=extra-small') {
+		float: none;
+	}
+}
+
+.left {
+	float: left;
+}
+
+.bold {
+	font-family: $f_bold;
+}
+
+.scroll-table {
+	overflow-x: scroll;
+}
+
+.mobile {
+	display: none;
+
+	@include media('<=small') {
+		display: block;
+	}
+}
+// ===========================================================
+// ROW AND COLUMNS
+// ===========================================================
+
+.row {
+	@extend .clearfix;
+
+	.col-bg,
+	.col-md,
+	.col-nr,
+	.col-sm {
+		float: left;
+	}
+
+	.col-bg {
+		width: 75%;
+
+		@include media('<=small') {
+			width: 100%;
+		}
+	}
+
+	.col-sm {
+		width: 25%;
+
+		@include media('<=small') {
+			width: 100%;
+		}
+	}
+
+	.col-nr {
+		width: 33%;
+	}
+
+	.col-md {
+		width: 49.6%;
+
+		@include media('<=extra-small') {
+			width: 100%;
+		}
+	}
+}
+
+
+// ===========================================================
+// CONTAINER
+// ===========================================================
+
+.wrapper {
+	height: 100%;
+}
+
+.content {
+	height: 100%;
+	background-color: $c_background;
+}
+
+.container-wrapper {
+	position: relative;
+	min-height: 100vh;
+	padding: 15px 0;
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		width: 10px;
+		height: 100%;
+		background-color: $c_black;
+	}
+}
+
+.container {
+	margin-right: auto;
+	margin-left: auto;
+	padding: 0 40px;
+
+	@include media('<=small') {
+		padding: 0 10px 0 20px;
+	}
+}
+
+// ===========================================================
+// BREADCRUMBS
+// ===========================================================
+
+.breadcrumbs {
+	margin: 20px 0 40px 0;
+
+	@include media('<=small') {
+		margin: 10px 0;
+	}
+
+	@include media('<=extra-small') {
+		margin: 0 0 10px 0;
+	}
+
+	& > a {
+		font-size: rem(16);
+		color: $c_red;
+		text-decoration: none;
+
+		& > .icon {
+			@include transform(rotate(180deg) translateY(-1px));
+			margin-right: 5px;
+
+			@include media('<=small') {
+				@include transform(rotate(180deg));
+			}
+		}
+	}
+}
+
+// ===========================================================
+// LOADING
+// ===========================================================
+
+#loading {
+	margin: 10px auto;
+	width: 30px;
+	height: 30px;
+	border: 4px solid $c_border;
+	border-top: 4px solid $c_red;
+	border-radius: 50%;
+	animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}

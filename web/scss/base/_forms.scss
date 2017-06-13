@@ -1,0 +1,201 @@
+// ===========================================================
+// FORMS
+// ===========================================================
+.search {
+	position: relative;
+	width: 380px;
+
+	@include media('<=small') {
+		width: 190px;
+	}
+
+	@include media('<=extra-small') {
+		width: 130px;
+	}
+
+	.txt-search {
+		width: 100%;
+		padding: 10px;
+		border: 0;
+		border-bottom: 2px solid $c_shadow_button;
+		background-color: transparent;
+		font-size: rem(16);
+
+		&:focus {
+			outline: none;
+		}
+
+		&::-webkit-input-placeholder {
+			color: #6e6e6e;
+			font-family: $f_regular;
+			font-size: rem(16);
+		}
+
+		@include media('<=small') {
+			padding-bottom: 5px;
+		}
+	}
+
+	.btn-search {
+		position: absolute;
+		top: 5px;
+		right: 10px;
+		color: $c_red;
+		background-color: transparent;
+		font-size: rem(25);
+		cursor: pointer;
+
+		&:hover {
+			color: $c_shadow_button;
+		}
+	}
+}
+
+#koibundle_feed {
+	& > div {
+		& > label {
+			display: inline-block;
+			min-width: 150px;
+		}
+	}
+}
+
+// =================================================================
+// STYLE OF RADIOBUTTONS AND CHECKBOXS
+// =================================================================
+
+input[type="radio"], input[type="checkbox"] {
+	display: none;
+	position: relative;
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+
+	& + label {
+		position: absolute;
+		padding-left: 40px;
+
+		@include media('<=small') {
+			padding-left: 30px;
+		}
+
+		&::before {
+			@include border-radius(2px);
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 20px;
+			height: 20px;
+			background-color: transparent;
+			border: 2px solid;
+			cursor: pointer;
+
+			@include media('<=small') {
+				width: 15px;
+				height: 15px;
+			}
+		}
+
+		&:focus {
+			outline: none;
+		}
+	}
+
+	&:checked {
+		& + label {
+			&::before {
+				@include border-radius(2px);
+				color: $c_white;
+				background-color: $c_red;
+				border: 2px solid $c_red;
+				text-align: center;
+				outline: none;
+			}
+
+			&:after {
+				content: "\e902";
+				position: absolute;
+				top: 0;
+				left: 2px;
+				color: $c_white;
+				font-family: 'icomoon';
+				font-size: 20px;
+
+				@include media('<=medium' '>=small') {
+					top: -4px;
+					left: 2px;
+				}
+
+				@include media('<=small') {
+					left: 3px;
+					font-size: rem(16);
+				}
+
+				@include media('<=extra-small') {
+					top: 1px;
+				}
+			}
+		}
+	}
+}
+
+// ==================================================================
+// STYLE OF SELECT OPTION
+// ==================================================================
+
+.select-list {
+	padding: 10px 85px 10px 10px;
+	border: 0;
+	background: transparent;
+	border-bottom: 2px solid $c_shadow_button;
+	color: $c_font_default;
+	font-family: $f_regular;
+	font-size: rem(16);
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	outline: none;
+
+	&:focus {
+		outline: none;
+	}
+
+	option {
+		background-color: $c_background;
+		appearance: none;
+		-moz-appearance: none;
+		-webkit-appearance: none;
+	}
+
+	& + .icon {
+	 	position: absolute;
+		top: 10px;
+		right: 5px;
+		color: $c_red;
+		font-size: rem(24);
+		pointer-events: none;
+	}
+
+	@include media('<=small') {
+		padding-bottom: 5px;
+	}
+}
+
+// ==================================================================
+// STYLE OF ALERT EMPTY
+// ==================================================================
+
+.alert {
+	@include transition(opacity, 0.8s);
+  	position: fixed;
+  	bottom: 10px;
+	width: 50%;
+	background-color: $c_white;
+	color: $c_red;
+	margin-top: 35px;
+	padding: 10px;
+	border: 1px solid $c_red;
+	opacity: 0;
+	pointer-events: none;
+}

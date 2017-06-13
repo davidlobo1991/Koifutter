@@ -1,0 +1,57 @@
+// ===========================================================
+// FILTER RANGE
+// ===========================================================
+
+.ui-widget {
+	&.slider-range,
+	&.slider-size,
+	&.slider-temperatur,
+	&.slider-price {
+		@include border-radius(5px);
+		position: relative;
+		height: 6px;
+		margin-bottom: 30px;
+		border: 0;
+		background-color: $c_range_slider;
+
+		.range-min, .range-max {
+			@include border-radius(50%);
+			top: -8px;
+			width: 20px;
+			height: 20px;
+			border: 0;
+			background-color: $c_black;
+			cursor: pointer;
+
+			&:focus {
+				border: 0;
+				outline: none;
+			}
+
+			@include media('<=small') {
+				width: 10px;
+				height: 10px;
+				top: -3px;
+			}
+		}
+
+		.range-min-txt, .range-max-txt {
+			position: absolute;
+			top: 20px;
+			font-size: rem(14);
+			color: $c_font_default;
+			font-family: $f_regular;
+		}
+		.range-min-txt {
+			left: 0;
+		}
+
+		.range-max-txt {
+			right: 0;
+		}
+
+		.ui-slider-range {
+			background-color: $c_red;
+		}
+	}
+}

@@ -1,0 +1,35 @@
+// ===========================================================
+// HEADER
+// ===========================================================
+.header {
+	header {
+		position: relative;
+		height: 70px;
+		background-color: $c_red;
+
+		@include media('<=extra-small') {
+			height: 60px;
+		}
+
+		.logo {
+			display: inline-block;
+			padding: 15px 40px;
+			color: $c_white;
+			line-height: 1;
+			text-decoration: none;
+
+			@include media('<=extra-small') {
+				padding: 10px 30px;
+			}
+		}
+
+		&:before {
+			content: "";
+			position: absolute;
+			top: 0;
+			width: 10px;
+			height: 100%;
+			background-color: $c_black;
+		}
+	}
+}

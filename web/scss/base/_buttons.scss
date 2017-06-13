@@ -1,0 +1,69 @@
+// ===========================================================
+// BUTTONS
+// ===========================================================
+
+button {
+	padding: 0;
+	border: 0;
+	-webkit-appearance: none;
+	@include border-radius(0);
+}
+
+.btn {
+	@include border-radius(5px);
+	@include box-shadow(0px 2px 0px 0px $c_shadow_button);
+	@include transition(background-color, $slow);
+	display: inline-block;
+	position: relative;
+	padding: 10px 20px;
+	line-height: 1;
+	font-family: $f_bold;
+	font-size: rem(16);
+	color: #fff;
+	background-color: $c_red;
+	border: 0;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	cursor: pointer;
+
+	.icon {
+		margin-right: 5px;
+		font-size: rem(24);
+		vertical-align: middle;
+	}
+
+	&:hover {
+		background-color: $c_shadow_button;
+	}
+
+	&:focus, &:active {
+		border: 0;
+		outline: 0;
+	}
+}
+
+#btn-filter {
+	padding: 10px 40px 5px 20px;
+
+	&.active {
+		@include box-shadow(0px 2px 0px 0px $c_shadow_button_active);
+		background-color: $c_range_slider;
+
+		.text {
+			&:after {
+				content: "\e905";
+				font-family: 'icomoon';
+				position: absolute;
+				right: 15px;
+				font-size: 18px;
+				top: 12px;
+
+				@include media('<=small') {
+					top: 10px;
+				}
+			}
+		}
+	}
+}
+

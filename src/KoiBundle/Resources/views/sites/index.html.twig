@@ -1,0 +1,110 @@
+{% extends 'KoiBundle::base.html.twig' %}
+{% block body %}
+    {{ parent() }}
+    <div class="wrapper">
+        <div class="overlay-popup">
+            <div class="overlay"></div>
+            <div class="compare-list">
+                <h2>Vergleichliste</h2>
+                <button class="btn-close"><span class="icon icon-cross"></span></button>
+                <div class="scroll-table">
+                    <div id="loading">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-wrap">
+            <!-- Start CONTENT -->
+            <div class="content">
+                {%  include('KoiBundle:sites/utils:filter.html.twig') %}
+
+                <div class="container-wrapper clearfix">
+                    <div class="container">
+                        <h2>
+                            Futterliste
+                        </h2>
+                        <div class="select-order right">
+                            <form id="form-sort" method="get" action="{{ path('_sorting') }}">
+                                <label for="list-order">Sortierung: </label>
+                                <select id="list-order" class="select-list" name="list-order">
+                                    <!-- Attributes of the table feed, therefore in english -->
+                                    <option value="nameFeed-asc-col">Alphabetisch (a - z)</option>
+                                    <option value="nameFeed-des-col">Alphabetisch (z - a)</option>
+                                    <option value="waterTemperature-asc-col">Temperatur (asc)</option>
+                                    <option value="waterTemperature-des-col">Temperatur (desc)</option>
+                                    <option value="pelletSizeMax-asc-col">Größe (asc)</option>
+                                    <option value="pelletSizeMax-des-col">Größe (desc)</option>
+
+                                    <!-- Name of the elements in the database, therefore in german -->
+                                    <option value="Rohprotein-asc">Rohprotein (asc)</option>
+                                    <option value="Rohprotein-des">Rohprotein (desc)</option>
+                                    <option value="Rohfett-asc">Rohfett (asc)</option>
+                                    <option value="Rohfett-des">Rohfett (desc)</option>
+                                    <option value="Rohasche-asc">Rohasche (asc)</option>
+                                    <option value="Rohasche-des">Rohasche (desc)</option>
+                                    <option value="Rohfaser-asc">Rohfaser (asc)</option>
+                                    <option value="Rohfaser-des">Rohfaser (desc)</option>
+                                </select>
+                                <span class="icon icon-chevron-down"></span>
+                                <input type="hidden" class="hidden_id_feed" name="id_feed" value="" />
+                                <input type="hidden" class="hidden_num_per_site" name="num_feed" value="{{ num_per_page }}" />
+                            </form>
+                        </div>
+
+                        <div class="koi-list">
+                            {% include 'KoiBundle:sites/utils:list.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function() {
+
+            // Feeds that are available now
+            var feedInPage = [];
+            var selFeedInPage = $('#list-order');
+            var selElementsPerSite = $('#num-feed');
+            var formFilter = $('#form-filter');
+            var nummer = 0;
+
+            {% if app.session.get('num') %}
+                setNumAct({{ app.session.get('num') }});
+            {% else %}
+                setNumAct(nummer);
+            {% endif %}
+
+            // Default (first time) all of them
+
+            {% for feedActive in feedAll %}
+            feedInPage.push({{ feedActive.id }});
+            {% endfor %}
+
+            // Selected parameter order list
+            selFeedInPage.find('option').each(function() {
+                if ($(this).val() == "{{ app.request.get('list-order') }}") {
+                    $(this).attr("selected", "selected");
+                }
+            });
+
+            selFeedInPage.on('change', function () {
+                $(this).siblings('.hidden_id_feed').val(JSON.stringify(feedInPage));
+                this.form.submit();
+				setNumAct({{ app.session.get('num') }});
+            });
+
+            selElementsPerSite.on('change', function() {
+				$(this).siblings('.hidden_id_feed').val(JSON.stringify(feedInPage));
+				this.form.submit();
+				setNumAct({{ app.session.get('num') }});
+			});
+        });
+    </script>
+{% endblock %}

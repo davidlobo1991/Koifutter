@@ -1,0 +1,107 @@
+<?php
+
+namespace KoiBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Feed_Element
+ *
+ * @ORM\Table(name="feed_elements")
+ * @ORM\Entity(repositoryClass="KoiBundle\Repository\Feed_ElementRepository")
+ */
+class Feed_Element
+{
+    /**
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Feed")
+     * @ORM\JoinColumn(name="id_feed", referencedColumnName="id")
+     */
+    private $idFeed;
+
+    /**
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Element")
+     * @ORM\JoinColumn(name="id_element", referencedColumnName="id")
+     */
+    private $idElement;
+
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $amount;
+
+    /**
+     * Set amount
+     *
+     * @param integer $amount
+     *
+     * @return Feed_Element
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Get amount
+     *
+     * @return integer
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Set idFeed
+     *
+     * @param \KoiBundle\Entity\Feed $idFeed
+     *
+     * @return Feed_Element
+     */
+    public function setIdFeed(\KoiBundle\Entity\Feed $idFeed)
+    {
+        $this->idFeed = $idFeed;
+
+        return $this;
+    }
+
+    /**
+     * Get idFeed
+     *
+     * @return \KoiBundle\Entity\Feed
+     */
+    public function getIdFeed()
+    {
+        return $this->idFeed;
+    }
+
+    /**
+     * Set idElement
+     *
+     * @param \KoiBundle\Entity\Element $idElement
+     *
+     * @return Feed_Element
+     */
+    public function setIdElement(\KoiBundle\Entity\Element $idElement)
+    {
+        $this->idElement = $idElement;
+
+        return $this;
+    }
+
+    /**
+     * Get idElement
+     *
+     * @return \KoiBundle\Entity\Element
+     */
+    public function getIdElement()
+    {
+        return $this->idElement;
+    }
+}

@@ -1,0 +1,77 @@
+<?php
+
+namespace KoiBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Feed_Seasons
+ *
+ * @ORM\Table(name="feed_seasons")
+ * @ORM\Entity(repositoryClass="KoiBundle\Repository\Feed_SeasonsRepository")
+ */
+class Feed_Seasons
+{
+    /**
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Feed")
+     * @ORM\JoinColumn(name="id_feed", referencedColumnName="id")
+     */
+    private $idFeed;
+
+    /**
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Season")
+     * @ORM\JoinColumn(name="id_season", referencedColumnName="id")
+     */
+    private $idSeason;
+
+
+    /**
+     * Set idFeed
+     *
+     * @param integer $idFeed
+     *
+     * @return Feed_Seasons
+     */
+    public function setIdFeed($idFeed)
+    {
+        $this->idFeed = $idFeed;
+
+        return $this;
+    }
+
+    /**
+     * Get idFeed
+     *
+     * @return int
+     */
+    public function getIdFeed()
+    {
+        return $this->idFeed;
+    }
+
+    /**
+     * Set idSeason
+     *
+     * @param integer $idSeason
+     *
+     * @return Feed_Seasons
+     */
+    public function setIdSeason($idSeason)
+    {
+        $this->idSeason = $idSeason;
+
+        return $this;
+    }
+
+    /**
+     * Get idSeason
+     *
+     * @return int
+     */
+    public function getIdSeason()
+    {
+        return $this->idSeason;
+    }
+}

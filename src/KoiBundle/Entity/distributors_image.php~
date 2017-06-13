@@ -1,0 +1,100 @@
+<?php
+
+namespace KoiBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\OneToOne;
+
+/**
+ * distributors_image
+ *
+ * @ORM\Table(name="distributors_image")
+ * @ORM\Entity(repositoryClass="KoiBundle\Repository\distributors_imageRepository")
+ */
+class distributors_image
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @OneToOne(targetEntity="distributors", mappedBy="id_image")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name_image", type="string", length=255)
+     */
+    private $nameImage;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="url_image", type="string", length=255)
+     */
+    private $urlImage;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nameImage
+     *
+     * @param string $nameImage
+     *
+     * @return distributors_image
+     */
+    public function setNameImage($nameImage)
+    {
+        $this->nameImage = $nameImage;
+
+        return $this;
+    }
+
+    /**
+     * Get nameImage
+     *
+     * @return string
+     */
+    public function getNameImage()
+    {
+        return $this->nameImage;
+    }
+
+    /**
+     * Set urlImage
+     *
+     * @param string $urlImage
+     *
+     * @return distributors_image
+     */
+    public function setUrlImage($urlImage)
+    {
+        $this->urlImage = $urlImage;
+
+        return $this;
+    }
+
+    /**
+     * Get urlImage
+     *
+     * @return string
+     */
+    public function getUrlImage()
+    {
+        return $this->urlImage;
+    }
+}
+
